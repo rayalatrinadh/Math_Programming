@@ -1,0 +1,33 @@
+7. Reverse Integer
+Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
+
+Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+
+class Solution {
+    public int reverse(int x) {
+        
+   boolean isNegative = false;
+    if (x < 0) {
+        isNegative = true;
+        x = -x;
+    }
+    
+    int reversedNum = 0;
+    while (x > 0) {
+        int digit = x % 10;
+        // Check for overflow
+        //System.out.println("Integer.Max_Value : "+ Integer.MAX_VALUE); 
+        //System.out.println("digit : "+ digit);
+        //System.out.println("integermax - digit " + (Integer.MAX_VALUE - digit));
+        //System.out.println("Integer.Max_Value - digit : "+ (Integer.MAX_VALUE - digit) / 10);
+        //System.out.println("----");
+        if (reversedNum > ((Integer.MAX_VALUE -digit)/10)) {
+            return 0;
+        }
+        reversedNum = reversedNum * 10 + digit;
+        x /= 10;
+    }
+    
+    return isNegative ? -reversedNum : reversedNum;
+}
+}
